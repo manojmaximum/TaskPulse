@@ -4,9 +4,11 @@
 
 To design a FastAPI app, which has an API which accepts requests to process a long-running program, but the API should
 respond back immediately after receiving the request, without waiting for the long-running program to be completed, and
-there should be another websocket or API, which the client can use to get the progress of the task in percentages, how
-would you design it. Consider that the API might receive thousands of requests at a time, and the APIs should scale
+there should be another websocket or API, which the client can use to get the progress of the task in percentages.
+Consider that the API might receive thousands of requests at a time, and the APIs should scale
 perfectly without freezing or crashing. So, using in-memory objects is not recommended.
+
+## Solution
 
 Designing a FastAPI app to handle long-running tasks efficiently while providing immediate responses and progress
 updates involves several components. Here's a high-level design approach:
