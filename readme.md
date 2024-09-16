@@ -50,7 +50,7 @@ updates involves several components. Here's a high-level design approach:
 - **Database Optimization**: Ensure the database is optimized for high read/write operations, possibly using indexing
   and partitioning.
 
-### Conclusion
+## Conclusion
 
 This design ensures that the FastAPI app can handle a high volume of requests without freezing or crashing, by
 offloading long-running tasks to Celery and using a database for progress tracking. The WebSocket endpoint provides
