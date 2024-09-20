@@ -32,16 +32,21 @@ async def task_status(task_id: str):
 
 @app.websocket("/ws/{task_id}")
 async def websocket_endpoint(websocket: WebSocket, task_id: str):
-    try:
-        await websocket.accept()
-        while True:
-            task = session.query(Tasks).filter(Tasks.id == task_id).first()
-            await websocket.send_json({"task_id": task_id, "progress": task["progress"]})
-            await asyncio.sleep(1)
-    except:
-        raise ("it is not working")
+    await websocket.accept()
+    while True:
+        task = get_detail(task_id)
+        await websocket.send_json({"task_id": task_id, "progress": task.progress})
+        await asyncio.sleep(1)
+  
 
 @app.websocket("/ws")
 async def sample_websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
     await websocket.send_json({"message": "Hello World"})
+
+
+def get_detail(task_id):
+    session = SessionLocal()
+    detail = session.query(Tasks).filter(Tasks.id == task_id).first()
+    session.close()
+    return detail
